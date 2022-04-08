@@ -67,8 +67,3 @@ You could also run this script every time you want to see a random highlight. Fo
 ## Authors
 
 - **Amal Rajan** - _Initial work_ - [Amal](https://github.com/amalrajan30)
-
-
-## License
-
-[MIT License](https://andreasonny.mit-license.org/2019) © Andrea SonnY
