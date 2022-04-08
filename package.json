@@ -8,8 +8,15 @@
     "highlights"
   ],
   "author": "Amal Rajan <amalrajan@duck.com>",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amalrajan30/kindle-highlight.git"
+  },
   "bin": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc"
   },
