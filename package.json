@@ -1,6 +1,6 @@
 {
   "name": "kindle-highlight",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Fetch and show random highlight from Kindle",
   "keywords": [
     "kindle",
@@ -21,10 +21,9 @@
     "build": "tsc"
   },
   "dependencies": {
-    "chalk": "^5.0.1",
+    "chalk": "^4.1.2",
     "commander": "^9.1.0",
     "conf": "^10.1.2",
-    "fs-extra": "^10.0.1",
     "prompts": "^2.4.2",
     "puppeteer": "^13.5.2"
   },
