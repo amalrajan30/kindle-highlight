@@ -1,6 +1,6 @@
 {
   "name": "kindle-highlight",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Fetch and show random highlight from Kindle",
   "keywords": [
     "kindle",
