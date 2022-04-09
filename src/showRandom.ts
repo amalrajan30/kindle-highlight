@@ -1,23 +1,39 @@
-import fs from "fs";
+import Conf from 'conf';
+import {BookHighlight, Highlight} from './getHighlight';
 
-const highlightsPath = "../temp/highlights.json";
+const conf = new Conf();
 
 const getRandomHighlight = () => {
-  if (!fs.existsSync(highlightsPath)) {
+  const allBooks = conf.get('highlights') as BookHighlight[];
+  if (!allBooks) {
     console.log(
-      "It seems like you don't have any highlights yet. Please run `kindle-highlight update` to sync your highlights."
+      "It seems like you don't have any highlights yet. Please run `kindle-highlight update` to sync your highlights.",
     );
     return null;
   }
-  const allBooks = JSON.parse(
-    fs.readFileSync(highlightsPath, "utf8")
-  );
-  const randomBookIndex = Math.floor(Math.random() * allBooks.length);
-  const randomBook = allBooks[randomBookIndex];
+
+  if (allBooks.length === 0) {
+    console.log('No highlights found');
+    return null;
+  }
+
+  let randomBook: BookHighlight = allBooks[0];
+  let bookHighlights: Highlight[] = [];
+
+  // Keep trying until we find a book with highlights
+  for (let index = 0; index < allBooks.length; index++) {
+    const randomBookIndex = Math.floor(Math.random() * allBooks.length);
+    randomBook = allBooks[randomBookIndex];
+    if (randomBook.highlights && randomBook.highlights.length > 0) {
+      bookHighlights = randomBook.highlights;
+      break;
+    }
+    allBooks.splice(randomBookIndex, 1);
+  }
   const randomHighlightIndex = Math.floor(
-    Math.random() * randomBook.highlights.length
+    Math.random() * bookHighlights.length,
   );
-  const randomHighlight = randomBook.highlights[randomHighlightIndex];
+  const randomHighlight = bookHighlights[randomHighlightIndex];
   return {
     bookTitle: randomBook.bookTitle,
     highlight: randomHighlight.highlight,
@@ -30,6 +46,6 @@ export const showRandomHighlight = () => {
     return;
   }
   console.log(
-    `${randomHighlight.highlight} \n\n - ${randomHighlight.bookTitle}`
+    `${randomHighlight.highlight} \n\n - ${randomHighlight.bookTitle}`,
   );
 };
