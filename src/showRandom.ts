@@ -1,19 +1,26 @@
 import Conf from 'conf';
+import chalk from 'chalk';
 import {BookHighlight, Highlight} from './getHighlight';
 
 const conf = new Conf();
+const log = console.log;
 
 const getRandomHighlight = () => {
   const allBooks = conf.get('highlights') as BookHighlight[];
   if (!allBooks) {
-    console.log(
-      "It seems like you don't have any highlights yet. Please run `kindle-highlight update` to sync your highlights.",
+    log(
+      chalk.white(
+        "It seems like you don't have any highlights yet. Please run ",
+      ) +
+        chalk.cyan('kindle-highlights update') +
+        chalk.white(' to sync your highlights.'),
     );
     return null;
   }
 
   if (allBooks.length === 0) {
     console.log('No highlights found');
+    log(chalk.white("It seems like you don't have any highlights yet."));
     return null;
   }
 
@@ -45,7 +52,9 @@ export const showRandomHighlight = () => {
   if (!randomHighlight) {
     return;
   }
-  console.log(
-    `${randomHighlight.highlight} \n\n - ${randomHighlight.bookTitle}`,
+  log(
+    `${chalk.green(randomHighlight.highlight)} \n\n - ${chalk.cyan(
+      randomHighlight.bookTitle,
+    )}`,
   );
 };
