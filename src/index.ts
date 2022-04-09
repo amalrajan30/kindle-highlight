@@ -21,11 +21,9 @@ program
 program
   .command("update")
   .description("Update Kindle Highlights")
-  .argument("<username>", "Amazon username")
-  .argument("[password]", "Amazon password")
   .option("--exec <exec>", "Executable path for custom browser", "")
-  .action(async (username, password, option) => {
-    await syncHighlights(username, password, option.exec);
+  .action(async ( option) => {
+    await syncHighlights(option.exec);
   });
 
 program.parse(process.argv);
